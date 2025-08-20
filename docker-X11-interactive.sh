@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Script for starting an interactive Docker container with X11 forwarding,
 # allowing graphical output to be displayed from within the container, such as
