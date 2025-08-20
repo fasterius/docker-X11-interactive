@@ -21,13 +21,11 @@
 #   docker-X11-interactive.sh python:3.13 python
 
 # Check for input arguments
-if [ $# -eq 0 ]
-  then
+if [ $# -eq 0 ]; then
     echo "No arguments supplied"
     echo "Usage: docker-X11-interactive.sh [OPTIONS] IMAGE [ARG...]"
     exit 1
 fi
-SCRIPT_ARGUMENTS="$@"
 
 # Open XQuartz if it's not running
 if ! ps aux | grep XQuartz | grep -vq grep; then
@@ -41,5 +39,5 @@ docker run \
     --interactive \
     --env DISPLAY=docker.for.mac.host.internal:0 \
     --workdir /work \
-    --volume $(pwd):/work \
-    ${SCRIPT_ARGUMENTS}
+    --volume "$(pwd):/work" \
+    "$@"
