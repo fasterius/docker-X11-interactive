@@ -17,7 +17,8 @@
 #   docker-X11-interactive.sh [OPTIONS] IMAGE [ARG...]
 #
 # Example usage:
-#   docker-X11-interactive.sh
+#   docker-X11-interactive.sh rocker/tidyverse R
+#   docker-X11-interactive.sh python:3.13 python
 
 # Check for input arguments
 if [ $# -eq 0 ]
