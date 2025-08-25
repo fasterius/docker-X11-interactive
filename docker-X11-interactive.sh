@@ -27,6 +27,23 @@ if [ $# -eq 0 ]; then
     exit 1
 fi
 
+# Find first non-option argument (which should be the IMAGE)
+for ARG in "$@"; do
+    if [[ $ARG != -* ]]; then
+        IMAGE="$ARG"
+        break
+    fi
+done
+
+# Check that IMAGE exists either locally or remotely
+if ! docker image inspect "$IMAGE" > /dev/null 2>&1; then
+    echo "Image \`$IMAGE\` not found locally, attempting to pull ..."
+    if ! docker pull "$IMAGE"; then
+        echo "Error: Failed to pull image \`$IMAGE\`"
+        exit 1
+    fi
+fi
+
 # Open XQuartz if it's not running
 if ! ps aux | grep XQuartz | grep -vq grep; then
     open -a XQuartz
